@@ -31,10 +31,10 @@ const Page = () => {
             <p>SnapCast makes screen recording easy. From quick walkthroughs to full
               tutorials, you can record your screen and share it with the world.</p>
             <article>
-                <Image src="/assets/images/jason.png" alt="Jason"
+                <Image src="/assets/images/sahir.jpeg" alt="Sahir"
                  width={64} height={64} className="rounded-full" />
                  <div>
-                  <h2>Jason Doe</h2>
+                  <h2>Sahir Hassan</h2>
                   <p>Web Developer, SnapCast</p>
                  </div>
             </article>
