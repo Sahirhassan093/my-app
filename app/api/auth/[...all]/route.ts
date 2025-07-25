@@ -13,8 +13,8 @@ const emailValidation = aj.withRule(
 const rateLimit = aj.withRule(
     slidingWindow({
         mode:'LIVE',
-        interval:'2m',
-        max:2,
+        interval:'1m',
+        max:10,
         characteristics:['fingerprint']
     })
 )
