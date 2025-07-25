@@ -6,12 +6,12 @@ import { authClient } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
 
 const Page = () => {
+  
   const router = useRouter();
   const handleSignIn = async () =>{
-    console.log("BASE URL:", process.env.NEXT_PUBLIC_BASE_URL)
     return await authClient.signIn.social({provider: 'google'})
   }
-  
+  console.log("BASE URL:", process.env.NEXT_PUBLIC_BASE_URL)
   return (
     <main className='sign-in'>
       <aside className='testimonial'>
