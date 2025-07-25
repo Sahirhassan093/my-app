@@ -14,7 +14,7 @@ const Page = async ({searchParams}: SearchParams) => {
       <Header title="All Videos" subHeader="Public Library"/>
 
 
-        {videos.length > 0 ? (
+        {Array.isArray(videos) && videos.length > 0 ? (
              <section className='video-grid'>
                 {videos.map(({video ,user}) => (
                   <VideoCard 

@@ -10,9 +10,7 @@ const Page = () => {
   const handleSignIn = async () =>{
     return await authClient.signIn.social({provider: 'google'})
   }
-  const handleInput = () =>{
-    router.push('userinputs')
-  }
+  
   return (
     <main className='sign-in'>
       <aside className='testimonial'>
@@ -53,11 +51,11 @@ const Page = () => {
               Create and share your very first <span>SpanCast Video </span> 
               in no time!
             </p>
-            <button onClick={handleInput}>
+            <button onClick={() => router.push('/userinputs')}>
               <span>Create your Account </span>
             </button>
             <button onClick={handleSignIn}>
-              <Image src="/assets/icons/google.svg" alt="Google" width={22} height={22} />
+              <Image src="/assets/icons/google.svg" alt="Google" width={24} height={24} />
               <span>Sign in with Google</span>
             </button>
         </section>

@@ -52,8 +52,7 @@ export const useScreenRecording = () => {
     try {
       stopRecording();
 
-      const { displayStream, micStream, hasDisplayAudio } =
-        await getMediaStreams(withMic);
+      const { displayStream, micStream, hasDisplayAudio } = await getMediaStreams(withMic);
       const combinedStream = new MediaStream() as ExtendedMediaStream;
 
       displayStream

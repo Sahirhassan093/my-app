@@ -5,13 +5,13 @@ import { url } from "inspector";
 import { redirect } from "next/navigation";
 import React from "react";
 
-const Page = async ({params}: Params) => {
+const Page = async ({params}: {params : {videoId:string}}) => {
     const {videoId} = await params;
 
-    const {user, video} = await getVideoById(videoId);
+    const data = await getVideoById(videoId);
 
-    if (!video) redirect('/404');
-
+    if (!data?.video) redirect('/delete');
+    const {video, user} = data;
     return (
         <main className="wrapper page">
             <VideoDetailHeader {...video} userImg={user?.image} username={user?.name}

@@ -8,6 +8,12 @@ import { authClient } from '@/lib/auth-client';
 
 const Navbar = () => {
   const router = useRouter();
+  const handleSigOut = async () =>{
+    const confirmed = confirm("Are you sure you want to log out?");
+    if (!confirmed) return;
+    await authClient.signOut();
+    router.push('/sign-in');
+  }
   const {data: session} = authClient.useSession();
   const user = session?.user;
   return (
@@ -23,7 +29,7 @@ const Navbar = () => {
                     <Image src={user.image || '' } alt="User" width={36} height={36} 
                     className="rounded-full aspect-square"/>
                 </button>
-                <button className="cursor-pointer">
+                <button onClick={handleSigOut} className="logout-button">
                     <Image src="/assets/icons/logout.svg" alt="Logout" width={24} height={24} 
                      className="rotate-180"/>
                 </button>

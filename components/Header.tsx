@@ -24,6 +24,10 @@ const Header = ({ subHeader, title, userImg} : SharedHeaderProps) => {
                 <span>Upload a video</span>
             </Link>
             <RecordScreen />
+            <Link href={`/delete`}>
+                <Image src="/assets/icons/delete.png" alt="Delete" width={16} height={16} />
+                <span>Delete a video</span>
+            </Link>
         </aside>
       </section>
 

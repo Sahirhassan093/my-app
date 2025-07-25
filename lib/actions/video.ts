@@ -221,3 +221,34 @@ export const getAllVideosByUser = withErrorHandling(
       return { user: userInfo, videos: userVideos, count: userVideos.length };
     }
   );
+
+  export const deleteVideoById = withErrorHandling(async (videoId: string) => {
+    const userId = await getSessionUserId();
+  
+    // 1. Get video from DB
+    const [videoRecord] = await db
+      .select()
+      .from(videos)
+      .where(eq(videos.id, videoId));
+  
+    if (!videoRecord) throw new Error("Video not found");
+    if (videoRecord.userId !== userId) throw new Error("Unauthorized");
+  
+    // 2. Delete from Bunny (optional, but good)
+    await apiFetch(
+      `${VIDEO_STREAM_BASE_URL}/${BUNNY_LIBRARY_ID}/videos/${videoRecord.videoId}`,
+      {
+        method: "DELETE",
+        bunnyType: "stream",
+      }
+    );
+  
+    // 3. Delete from DB
+    await db.delete(videos).where(eq(videos.id, videoId));
+  
+    // 4. Revalidate the UI paths
+    revalidatePaths(["/", "/uploads", "/delete"]);
+  
+    return { success: true };
+  });
+  
