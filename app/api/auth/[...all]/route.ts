@@ -48,17 +48,30 @@ export const { GET } = authHandlers;
 export const POST = async (req: NextRequest) => {
     const decision = await protectedAuth(req);
 
-    if(decision.isDenied()){
-        if(decision.reason.isEmail()){
-            throw new Error('Email validation failed');
+    if (decision.isDenied()) {
+        if (decision.reason.isEmail()) {
+            return NextResponse.json(
+                { error: 'Email validation failed' },
+                { status: 400 }
+            );
         }
-        if(decision.reason.isRateLimit()){
-            throw new Error('Rate limit exceeded');
+
+        if (decision.reason.isRateLimit()) {
+            return NextResponse.json(
+                { error: 'Rate limit exceeded' },
+                { status: 429 }
+            );
         }
-        if(decision.reason.isShield()){
-            throw new Error('Shield validation failed');
+
+        if (decision.reason.isShield()) {
+            return NextResponse.json(
+                { error: 'Shield validation failed' },
+                { status: 403 }
+            );
         }
     }
+
     return authHandlers.POST(req);
-}
+};
+
 
